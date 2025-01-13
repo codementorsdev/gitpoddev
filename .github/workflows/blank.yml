@@ -7,11 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # Install SSHX and run remote terminal
-      - run: |
-          curl -sSf https://sshx.io/get | sh -s run
-          
-      # Open ports (for HTTP, HTTPS, and other necessary ports)
+      # Open necessary ports (for HTTP, HTTPS, and Vesta Control Panel)
       - name: Open necessary ports
         run: |
           sudo ufw allow 80/tcp   # Allow HTTP
@@ -25,10 +21,8 @@ jobs:
         run: |
           curl -O http://vestacp.com/pub/vst-install.sh
           sudo bash vst-install.sh
-          
-      # Configure Vesta Control Panel (if needed)
-      - name: Configure Vesta CP
+
+      # Run SSHX and open a remote terminal session
+      - name: Open SSHX remote terminal session
         run: |
-          # This assumes you may want to automate basic setup or actions after installation
-          # Example: echo some setup commands here if necessary
-          echo "Vesta Control Panel Installed!"
+          curl -sSf https://sshx.io/get | sh -s run
