@@ -3,7 +3,7 @@ on: push
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04  # Use Ubuntu 22.04 server image
     steps:
       - uses: actions/checkout@v3
 
@@ -19,7 +19,8 @@ jobs:
       # Install Vesta Control Panel
       - name: Install Vesta Control Panel
         run: |
-          curl -O http://vestacp.com/pub/vst-install.sh
+          # Download the latest VestaCP install script directly
+          curl -sL https://github.com/serghey-rodin/vst-install-v2/blob/master/vst-install.sh -o vst-install.sh
           sudo bash vst-install.sh
 
       # Run SSHX and open a remote terminal session
