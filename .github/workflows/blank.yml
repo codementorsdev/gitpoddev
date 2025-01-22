@@ -23,6 +23,17 @@ jobs:
           curl -sL https://github.com/serghey-rodin/vst-install-v2/blob/master/vst-install.sh -o vst-install.sh
           sudo bash vst-install.sh
 
+      # Install PHP and required dependencies for the API server
+      - name: Install PHP and required extensions
+        run: |
+          sudo apt update
+          sudo apt install -y php php-cli php-fpm php-mysql
+
+      # Start PHP-based API server using PHP's built-in server
+      - name: Start PHP API server
+        run: |
+          nohup php -S 0.0.0.0:8000 -t ./public &
+
       # Run SSHX and open a remote terminal session
       - name: Open SSHX remote terminal session
         run: |
